@@ -1,25 +1,42 @@
-import React, { useEffect, useState } from "react";
+import React, {useState, useEffect} from "react";
 import NewPlantForm from "./NewPlantForm";
 import PlantList from "./PlantList";
 import Search from "./Search";
 
+const baseUrl = "http://localhost:6001"
+const plantsUrl = "http://localhost:6001/plants"
+
 function PlantPage() {
-  const url = "http://localhost:6001/plants"
-  const [plants, setPlants] = useState([])
+
+  const [plants, setPlants] = useState([]);
 
   useEffect(() => {
-    fetch(url)
+    fetch(plantsUrl)
     .then(res => res.json())
     .then(setPlants)
   }, [])
 
+  function createNewPlant (event, newPlant) {
+    event.preventDefault();
+    newPlant.price = parseInt(newPlant.price);
+
+    fetch(plantsUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "accepts": "application/json"
+      },
+      body: JSON.stringify(newPlant)
+    })
+    .then(res => res.json())
+    .then(data => setPlants([...plants, data]))
+  }
+
   return (
     <main>
-      <NewPlantForm />
+      <NewPlantForm createNewPlant={createNewPlant}/>
       <Search />
-      <PlantList 
-        plants={plants}
-        url={url}/>
+      <PlantList plants={plants}/>
     </main>
   );
 }
