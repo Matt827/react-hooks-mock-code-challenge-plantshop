@@ -41,6 +41,12 @@
       "name": "Fiddle Leaf Fig",
       "image": "./images/fiddle-leaf-fig.jpg",
       "price": 55
+    },
+    {
+      "name": "Mr.Dig",
+      "image": "http://localhost:3000/images/zz-plant.jpg",
+      "price": 1,
+      "id": 8
     }
   ]
 }

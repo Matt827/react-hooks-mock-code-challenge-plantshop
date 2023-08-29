@@ -1,14 +1,14 @@
 import React from "react";
 import PlantCard from "./PlantCard";
-import PlantPage from "./PlantPage";
 
-function PlantList({plants}) {
-
-  const renderPlantCards = plants.map(plant => {
+function PlantList({plants, changeStock, stock}) {
+  const renderPlantCards = plants.map((plant) => {
     return <PlantCard 
       key={plant.id}
-      plant={plant} />
-      // {...plant} />
+      {...plant}
+      changeStock={changeStock} 
+      stock={stock}
+      />
   })
 
   return (

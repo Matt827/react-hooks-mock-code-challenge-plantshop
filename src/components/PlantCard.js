@@ -1,19 +1,21 @@
 import React from "react";
 
-function PlantCard({ plant }) {
-
-const {id, name, image, price} = plant
+function PlantCard({id, name, image, price, changeStock, stock}) {
 
   return (
     <li className="card">
       <img src={image} alt={name} />
       <h4>{name}</h4>
       <p>Price: {price}</p>
-      {true ? (
-        <button className="primary">In Stock</button>
+
+      {!stock.includes(id) ? (
+        // true
+        <button  onClick={() => changeStock(id)} className="primary">In Stock</button>
       ) : (
-        <button>Out of Stock</button>
+        // false
+        <button onClick={() => changeStock(id)} >Out of Stock</button>
       )}
+      
     </li>
   );
 }
